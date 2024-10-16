@@ -1,0 +1,36 @@
+# File `/dataconnect/schema/schema.gql`
+
+type User @table {
+	id: UUID! @default(expr: "uuidV4()")
+	name: String!
+	surname: String!
+	citizenId: String!
+	email: String! @unique
+	phone: String
+	birthdate: Date
+}
+
+type Store @table {
+	id: UUID! @default(expr: "uuidV4()")
+	name: String!
+	description: String
+	owner: User! @ref
+	address: String
+	phone: String
+}
+
+type Product @table {
+	id: UUID! @default(expr: "uuidV4()")
+	name: String!
+	description: String
+	price: Float!
+	store: Store! @ref
+}
+
+type Order @table {
+	id: UUID! @default(expr: "uuidV4()")
+	user: User! @ref
+	product: Product! @ref
+	quantity: Int!
+	orderDate: Date! @default(expr: "request.time")
+}

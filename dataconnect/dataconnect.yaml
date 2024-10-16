@@ -1,0 +1,12 @@
+specVersion: "v1beta"
+serviceId: "eco-bites-sql"
+location: "us-west2"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "eco-bites"
+      cloudSql:
+        instanceId: "eco-bites-sql"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]
